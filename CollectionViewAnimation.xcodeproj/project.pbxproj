@@ -12,7 +12,9 @@
 		58C3FB951CEF477C0008922E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58C3FB931CEF477C0008922E /* Main.storyboard */; };
 		58C3FB971CEF477C0008922E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58C3FB961CEF477C0008922E /* Assets.xcassets */; };
 		58C3FB9A1CEF477C0008922E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58C3FB981CEF477C0008922E /* LaunchScreen.storyboard */; };
-		58C3FBA41CEF48470008922E /* CustomFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C3FBA31CEF48470008922E /* CustomFlowLayout.swift */; };
+		58C3FBA41CEF48470008922E /* LinfzFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C3FBA31CEF48470008922E /* LinfzFlowLayout.swift */; };
+		58C3FBA91CEF56CE0008922E /* LinfzCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C3FBA71CEF56CE0008922E /* LinfzCollectionViewCell.swift */; };
+		58C3FBAA1CEF56CE0008922E /* LinfzCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58C3FBA81CEF56CE0008922E /* LinfzCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,7 +25,9 @@
 		58C3FB961CEF477C0008922E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		58C3FB991CEF477C0008922E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		58C3FB9B1CEF477C0008922E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		58C3FBA31CEF48470008922E /* CustomFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomFlowLayout.swift; sourceTree = "<group>"; };
+		58C3FBA31CEF48470008922E /* LinfzFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinfzFlowLayout.swift; sourceTree = "<group>"; };
+		58C3FBA71CEF56CE0008922E /* LinfzCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinfzCollectionViewCell.swift; sourceTree = "<group>"; };
+		58C3FBA81CEF56CE0008922E /* LinfzCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LinfzCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +60,25 @@
 		58C3FB8E1CEF477C0008922E /* CollectionViewAnimation */ = {
 			isa = PBXGroup;
 			children = (
-				58C3FB8F1CEF477C0008922E /* AppDelegate.swift */,
+				58C3FBA31CEF48470008922E /* LinfzFlowLayout.swift */,
 				58C3FB911CEF477C0008922E /* ViewController.swift */,
 				58C3FB931CEF477C0008922E /* Main.storyboard */,
+				58C3FBA61CEF54240008922E /* Supporting Files */,
+				58C3FBA71CEF56CE0008922E /* LinfzCollectionViewCell.swift */,
+				58C3FBA81CEF56CE0008922E /* LinfzCollectionViewCell.xib */,
+			);
+			path = CollectionViewAnimation;
+			sourceTree = "<group>";
+		};
+		58C3FBA61CEF54240008922E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				58C3FB8F1CEF477C0008922E /* AppDelegate.swift */,
 				58C3FB961CEF477C0008922E /* Assets.xcassets */,
 				58C3FB981CEF477C0008922E /* LaunchScreen.storyboard */,
 				58C3FB9B1CEF477C0008922E /* Info.plist */,
-				58C3FBA31CEF48470008922E /* CustomFlowLayout.swift */,
 			);
-			path = CollectionViewAnimation;
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,6 +141,7 @@
 			files = (
 				58C3FB9A1CEF477C0008922E /* LaunchScreen.storyboard in Resources */,
 				58C3FB971CEF477C0008922E /* Assets.xcassets in Resources */,
+				58C3FBAA1CEF56CE0008922E /* LinfzCollectionViewCell.xib in Resources */,
 				58C3FB951CEF477C0008922E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,7 +154,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				58C3FB921CEF477C0008922E /* ViewController.swift in Sources */,
-				58C3FBA41CEF48470008922E /* CustomFlowLayout.swift in Sources */,
+				58C3FBA41CEF48470008922E /* LinfzFlowLayout.swift in Sources */,
+				58C3FBA91CEF56CE0008922E /* LinfzCollectionViewCell.swift in Sources */,
 				58C3FB901CEF477C0008922E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,6 +308,7 @@
 				58C3FBA01CEF477C0008922E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
