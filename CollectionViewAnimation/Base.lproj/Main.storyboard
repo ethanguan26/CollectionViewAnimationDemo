@@ -32,10 +32,10 @@
                                 </connections>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qqz-z1-l12">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="128"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="90"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="0Pg-R5-OrH"/>
+                                    <constraint firstAttribute="height" constant="90" id="0Pg-R5-OrH"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -51,6 +51,7 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="X2D-7y-3ma" id="zXD-gt-9c7"/>
+                        <outlet property="collectionViewHeightConstraint" destination="ssS-wf-1Yc" id="OVQ-Ly-2bY"/>
                         <outlet property="headerHeightConstraint" destination="0Pg-R5-OrH" id="PE5-YK-J8v"/>
                     </connections>
                 </viewController>

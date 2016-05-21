@@ -11,10 +11,11 @@ import UIKit
 let DidTapCollectionViewNotification = "DidTapCollectionView"
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var headerHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
     var itemType = ItemType.Small
     var originType = ItemType.Small
     var selectedIndex = 0
@@ -47,28 +48,27 @@ extension ViewController {
     
     func layoutCollectionViewSubviews() {
         var itemSize = CGSize()
-        var locationHeight:CGFloat
-        var heightConstraint: CGFloat
+        var collectionHeight:CGFloat
+        var headerHeight: CGFloat
         
         let sizeAndHeight = getItemSizeAndContainer(itemType)
         itemSize = sizeAndHeight.itemSize
-        locationHeight = sizeAndHeight.locationHeight
+        collectionHeight = sizeAndHeight.locationHeight
         
         switch itemType {
         case .Small:
-            heightConstraint = 128
+            headerHeight = 128
         case .Normal:
-            heightConstraint = 0
+            headerHeight = 0
         case .Large:
-            heightConstraint = 0
+            headerHeight = 0
         }
         
-//        if isTurnToBigSize {
-//            startAnimationTurnToBigSize(itemSize, top: mapDescriptionTop, hide: currentPlaceButtonHide,locationHeight: locationHeight)
-//        }else {
-//            startAnimationTurnToSmallSize(itemSize, top: mapDescriptionTop, hide: currentPlaceButtonHide, locationHeight: locationHeight)
-//        }
-
+        (self.collectionView.collectionViewLayout as! LinfzFlowLayout).itemSize = itemSize;
+        self.headerHeightConstraint.constant = headerHeight
+        self.collectionViewHeightConstraint.constant = collectionHeight
+        self.view.layoutIfNeeded()
+        self.collectionView.scrollToItemAtIndexPath(NSIndexPath(forRow: self.selectedIndex, inSection: 0), atScrollPosition: .CenteredHorizontally, animated: false)
     }
     
     func getCurrentItemWidth(itemType:ItemType) -> CGFloat {
@@ -103,8 +103,6 @@ extension ViewController {
         return (itemSize,locationHeight)
         
     }
-
-
 }
 
 // MARK: - collectinView dataSource and collectionView delegate

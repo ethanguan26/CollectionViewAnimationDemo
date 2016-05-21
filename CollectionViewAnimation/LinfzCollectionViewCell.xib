@@ -13,8 +13,8 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="229" height="278"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WOP-p1-hAj">
-                        <rect key="frame" x="93" y="128" width="42" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WOP-p1-hAj">
+                        <rect key="frame" x="-0.5" y="-0.5" width="229" height="278"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -23,8 +23,10 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
+                <constraint firstItem="WOP-p1-hAj" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" id="KNq-Q6-MMO"/>
                 <constraint firstItem="WOP-p1-hAj" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="M6c-Uu-Di8"/>
                 <constraint firstItem="WOP-p1-hAj" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="PDd-lQ-TM8"/>
+                <constraint firstItem="WOP-p1-hAj" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" id="tNR-RD-UBc"/>
             </constraints>
             <size key="customSize" width="229" height="278"/>
             <connections>
