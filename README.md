@@ -1,6 +1,4 @@
 #### CollectionViewAnimationDemo
 learn about collection-view animation 
 
-use `setCollectionViewLayout` to change the item's size
-
-TODO:  try to use `targetContentOffsetForProposedContentOffset` to make the cell witch selected move to the correct position
+Now, it has an issue during change the collection-view layout which turns to small size looks like has no animation
