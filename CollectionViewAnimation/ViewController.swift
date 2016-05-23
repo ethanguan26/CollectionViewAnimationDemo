@@ -14,12 +14,16 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var headerHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
+    
     var itemType = ItemType.Small
     var originType = ItemType.Small
     var selectedIndex = 0
     var isTurnToBigSize = false
+    
+    var smallLayout = LinfzFlowLayout()
+    var normalLayout = LinfzNormalLayout()
+    var largeLayout = LinfzLargeLayout()
     
     //MARK: - life circle
     override func viewDidLoad() {
@@ -27,6 +31,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         collectionView.registerNib(UINib(nibName: "LinfzCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.didTapCollectionView(_:)), name: DidTapCollectionViewNotification, object: nil)
+        
     }
 }
 
@@ -47,40 +52,35 @@ extension ViewController {
     }
     
     func layoutCollectionViewSubviews() {
-        var itemSize = CGSize()
         var collectionHeight:CGFloat
         var headerHeight: CGFloat
-        
+        var layout: UICollectionViewFlowLayout?
         let sizeAndHeight = getItemSizeAndContainer(itemType)
-        itemSize = sizeAndHeight.itemSize
         collectionHeight = sizeAndHeight.locationHeight
         
         switch itemType {
         case .Small:
-            headerHeight = 128
+            headerHeight = 90
+            layout = smallLayout
         case .Normal:
             headerHeight = 0
+            layout = normalLayout
         case .Large:
             headerHeight = 0
+            layout = largeLayout
         }
         
-        (self.collectionView.collectionViewLayout as! LinfzFlowLayout).itemSize = itemSize;
-        self.headerHeightConstraint.constant = headerHeight
         self.collectionViewHeightConstraint.constant = collectionHeight
         self.view.layoutIfNeeded()
-        self.collectionView.scrollToItemAtIndexPath(NSIndexPath(forRow: self.selectedIndex, inSection: 0), atScrollPosition: .CenteredHorizontally, animated: false)
-    }
-    
-    func getCurrentItemWidth(itemType:ItemType) -> CGFloat {
-        var itemWidth:CGFloat = 0.0;
-        if itemType == .Small {
-            itemWidth = ITEM_SMALL_WIDTH
-        }else if itemType == .Normal {
-            itemWidth = ITEM_NORMAL_WIDTH
-        }else {
-            itemWidth = ScreenWidth
+        UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
+            self.collectionView.setCollectionViewLayout(layout!, animated: true)
+            }) { (finish) in
+                UIView.animateWithDuration(0.3, animations: { 
+                    self.headerHeightConstraint.constant = headerHeight
+                    self.view.layoutIfNeeded()
+                })
         }
-        return itemWidth
+        
     }
     
     func getItemSizeAndContainer(itemType:ItemType) -> (itemSize:CGSize,locationHeight:CGFloat) {
@@ -97,8 +97,8 @@ extension ViewController {
             locationHeight = ITEM_NORMAL_HEIGHT
             
         case .Large:
-            itemSize = CGSizeMake(ScreenWidth, ScreenHeight - 64)
-            locationHeight = ScreenHeight - 64
+            itemSize = CGSizeMake(ScreenWidth, ScreenHeight)
+            locationHeight = ScreenHeight
         }
         return (itemSize,locationHeight)
         

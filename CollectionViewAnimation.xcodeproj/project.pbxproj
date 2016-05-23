@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5891BC2D1CF2A702005D3225 /* LinfzNormalLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5891BC2C1CF2A702005D3225 /* LinfzNormalLayout.swift */; };
+		5891BC2F1CF2AA2C005D3225 /* LinfzLargeLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5891BC2E1CF2AA2C005D3225 /* LinfzLargeLayout.swift */; };
+		5891BC311CF2AAF8005D3225 /* CollectionVewAnimationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5891BC301CF2AAF8005D3225 /* CollectionVewAnimationConstants.swift */; };
 		58C3FB901CEF477C0008922E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C3FB8F1CEF477C0008922E /* AppDelegate.swift */; };
 		58C3FB921CEF477C0008922E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58C3FB911CEF477C0008922E /* ViewController.swift */; };
 		58C3FB951CEF477C0008922E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58C3FB931CEF477C0008922E /* Main.storyboard */; };
@@ -18,6 +21,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5891BC2C1CF2A702005D3225 /* LinfzNormalLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinfzNormalLayout.swift; sourceTree = "<group>"; };
+		5891BC2E1CF2AA2C005D3225 /* LinfzLargeLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinfzLargeLayout.swift; sourceTree = "<group>"; };
+		5891BC301CF2AAF8005D3225 /* CollectionVewAnimationConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionVewAnimationConstants.swift; sourceTree = "<group>"; };
 		58C3FB8C1CEF477C0008922E /* CollectionViewAnimation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionViewAnimation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58C3FB8F1CEF477C0008922E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		58C3FB911CEF477C0008922E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -60,7 +66,10 @@
 		58C3FB8E1CEF477C0008922E /* CollectionViewAnimation */ = {
 			isa = PBXGroup;
 			children = (
+				5891BC301CF2AAF8005D3225 /* CollectionVewAnimationConstants.swift */,
 				58C3FBA31CEF48470008922E /* LinfzFlowLayout.swift */,
+				5891BC2C1CF2A702005D3225 /* LinfzNormalLayout.swift */,
+				5891BC2E1CF2AA2C005D3225 /* LinfzLargeLayout.swift */,
 				58C3FB911CEF477C0008922E /* ViewController.swift */,
 				58C3FB931CEF477C0008922E /* Main.storyboard */,
 				58C3FBA61CEF54240008922E /* Supporting Files */,
@@ -153,9 +162,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5891BC2D1CF2A702005D3225 /* LinfzNormalLayout.swift in Sources */,
+				5891BC2F1CF2AA2C005D3225 /* LinfzLargeLayout.swift in Sources */,
 				58C3FB921CEF477C0008922E /* ViewController.swift in Sources */,
 				58C3FBA41CEF48470008922E /* LinfzFlowLayout.swift in Sources */,
 				58C3FBA91CEF56CE0008922E /* LinfzCollectionViewCell.swift in Sources */,
+				5891BC311CF2AAF8005D3225 /* CollectionVewAnimationConstants.swift in Sources */,
 				58C3FB901CEF477C0008922E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

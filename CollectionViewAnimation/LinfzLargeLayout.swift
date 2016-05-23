@@ -1,14 +1,14 @@
 //
-//  LinfzFlowLayout.swift
+//  LinfzLargeLayout.swift
 //  CollectionViewAnimation
 //
-//  Created by YGuan on 5/20/16.
-//  Copyright © 2016 YGuan. All rights reserved.
+//  Created by YGuan on 16/5/23.
+//  Copyright © 2016年 YGuan. All rights reserved.
 //
 
 import UIKit
 
-class LinfzFlowLayout: UICollectionViewFlowLayout {
+class LinfzLargeLayout: UICollectionViewFlowLayout {
     override init() {
         super.init()
         config()
@@ -21,7 +21,7 @@ class LinfzFlowLayout: UICollectionViewFlowLayout {
     
     func config(){
         
-        itemSize = CGSizeMake(ITEM_SMALL_WIDTH, ITEM_SMALL_HEIGHT);
+        itemSize = CGSizeMake(ScreenWidth, ScreenHeight);
         scrollDirection = .Horizontal
         minimumLineSpacing = ITEM_SPACING
     }
@@ -36,5 +36,4 @@ class LinfzFlowLayout: UICollectionViewFlowLayout {
         }
         return false
     }
-
 }
