@@ -15,11 +15,11 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="X2D-7y-3ma">
-                                <rect key="frame" x="0.0" y="400" width="600" height="200"/>
+                                <rect key="frame" x="0.0" y="368" width="320" height="200"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="ssS-wf-1Yc"/>
@@ -32,7 +32,7 @@
                                 </connections>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qqz-z1-l12">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="90"/>
+                                <rect key="frame" x="-4" y="0.0" width="328" height="90"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="0Pg-R5-OrH"/>
@@ -44,11 +44,12 @@
                             <constraint firstItem="qqz-z1-l12" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-20" id="2Ly-ij-sXV"/>
                             <constraint firstAttribute="trailingMargin" secondItem="qqz-z1-l12" secondAttribute="trailing" constant="-20" id="3yV-Xv-gWu"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="X2D-7y-3ma" secondAttribute="bottom" id="5SW-b4-QuK"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="X2D-7y-3ma" secondAttribute="trailing" constant="-20" id="cgp-SE-m4J"/>
-                            <constraint firstItem="X2D-7y-3ma" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="kPa-aT-UNb"/>
+                            <constraint firstItem="X2D-7y-3ma" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="HUX-2v-ckP"/>
                             <constraint firstItem="qqz-z1-l12" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="vEk-jL-O2L"/>
+                            <constraint firstAttribute="trailing" secondItem="X2D-7y-3ma" secondAttribute="trailing" id="xzg-4O-mcE"/>
                         </constraints>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="collectionView" destination="X2D-7y-3ma" id="zXD-gt-9c7"/>
                         <outlet property="collectionViewHeightConstraint" destination="ssS-wf-1Yc" id="OVQ-Ly-2bY"/>

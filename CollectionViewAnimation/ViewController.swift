@@ -22,14 +22,20 @@ class ViewController: UIViewController {
     var isTurnToBigSize = false
     
     var smallLayout = LinfzFlowLayout()
-    var normalLayout = LinfzNormalLayout()
-    var largeLayout = LinfzLargeLayout()
+    var normalLayout = LinfzFlowLayout()
+    var largeLayout = LinfzFlowLayout()
     
     //MARK: - life circle
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        smallLayout.itemSize = CGSize(width: ITEM_SMALL_WIDTH, height: ITEM_SMALL_HEIGHT)
+        normalLayout.itemSize = CGSize(width: ITEM_NORMAL_WIDTH, height: ITEM_NORMAL_HEIGHT)
+        largeLayout.itemSize = CGSize(width: ScreenWidth, height: ScreenHeight)
+        
         collectionView.registerNib(UINib(nibName: "LinfzCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
+        collectionView.decelerationRate = 0.3
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.didTapCollectionView(_:)), name: DidTapCollectionViewNotification, object: nil)
         
     }
@@ -71,16 +77,21 @@ extension ViewController {
         }
         
         layout?.setValue(selectedIndex, forKey: "targetIndex")
-        
         self.collectionViewHeightConstraint.constant = collectionHeight
-        self.view.layoutIfNeeded()
+        
+        if isTurnToBigSize {
+            self.view.layoutIfNeeded()
+        }
         UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
+            if !self.isTurnToBigSize {
+                self.view.layoutIfNeeded()
+            }
             self.collectionView.setCollectionViewLayout(layout!, animated: true)
-            }) { (finish) in
-                UIView.animateWithDuration(0.3, animations: { 
-                    self.headerHeightConstraint.constant = headerHeight
-                    self.view.layoutIfNeeded()
-                })
+        }) { (finish) in
+            UIView.animateWithDuration(0.3, animations: {
+                self.headerHeightConstraint.constant = headerHeight
+                self.view.layoutIfNeeded()
+            })
         }
         
     }
@@ -125,3 +136,41 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
         return cell
     }
 }
+
+extension ViewController: UIScrollViewDelegate {
+    
+    func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if velocity == CGPointZero {
+            return
+        }
+        
+        if velocity.x > 0 {
+            selectedIndex += 1
+        }
+        if velocity.x < 0{
+            selectedIndex -= 1
+        }
+        if selectedIndex < 0 {
+            selectedIndex = 0
+        } else if selectedIndex > collectionView.numberOfItemsInSection(0) - 1 {
+            selectedIndex = collectionView.numberOfItemsInSection(0) - 1
+        }
+
+        let sizeAndHeight = getItemSizeAndContainer(itemType)
+        let itemSize = sizeAndHeight.itemSize
+        
+        var targetPoint = CGPointZero
+        if selectedIndex == 1 {
+            targetPoint.x = itemSize.width * 1.5 + ITEM_SPACING - ScreenWidth / 2
+        } else if selectedIndex > 1  && selectedIndex < (collectionView?.numberOfItemsInSection(0))! - 1{
+            targetPoint.x = itemSize.width * 1.5 + ITEM_SPACING - ScreenWidth / 2 + CGFloat(selectedIndex - 1) * (itemSize.width + ITEM_SPACING)
+        } else if selectedIndex ==  (collectionView?.numberOfItemsInSection(0))! - 1 {
+            targetPoint.x =  itemSize.width * 3 + ITEM_SPACING * 2 - ScreenWidth + CGFloat(selectedIndex - 2) * (itemSize.width + ITEM_SPACING)
+        }
+        
+        targetContentOffset.memory = CGPoint(x: CGFloat(targetPoint.x),y: CGFloat(targetPoint.y))
+        scrollView.setContentOffset(targetPoint, animated: true)
+    }
+    
+}
+
