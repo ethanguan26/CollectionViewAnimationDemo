@@ -70,6 +70,8 @@ extension ViewController {
             layout = largeLayout
         }
         
+        layout?.setValue(selectedIndex, forKey: "targetIndex")
+        
         self.collectionViewHeightConstraint.constant = collectionHeight
         self.view.layoutIfNeeded()
         UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {

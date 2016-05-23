@@ -9,6 +9,9 @@
 import UIKit
 
 class LinfzLargeLayout: UICollectionViewFlowLayout {
+    
+    var targetIndex = 0
+    
     override init() {
         super.init()
         config()
@@ -36,4 +39,5 @@ class LinfzLargeLayout: UICollectionViewFlowLayout {
         }
         return false
     }
+    
 }

@@ -9,6 +9,9 @@
 import UIKit
 
 class LinfzNormalLayout: UICollectionViewFlowLayout {
+    
+    var targetIndex = 0
+    
     override init() {
         super.init()
         config()
@@ -36,6 +39,20 @@ class LinfzNormalLayout: UICollectionViewFlowLayout {
             cell?.contentView.frame.origin.y = (cell?.frame.origin.y)!
         }
         return false
+    }
+    
+    override func targetContentOffsetForProposedContentOffset(proposedContentOffset: CGPoint) -> CGPoint {
+        
+        var targetPoint = CGPointZero
+        if targetIndex == 1 {
+            targetPoint.x = itemSize.width * 1.5 + ITEM_SPACING - ScreenWidth / 2
+        } else if targetIndex > 1  && targetIndex < (collectionView?.numberOfItemsInSection(0))! - 1{
+            targetPoint.x = itemSize.width * 1.5 + ITEM_SPACING - ScreenWidth / 2 + CGFloat(targetIndex - 1) * (itemSize.width + ITEM_SPACING)
+        } else if targetIndex ==  (collectionView?.numberOfItemsInSection(0))! - 1 {
+            targetPoint.x =  itemSize.width * 3 + ITEM_SPACING * 2 - ScreenWidth + CGFloat(targetIndex - 1) * (itemSize.width + ITEM_SPACING)
+        }
+        
+        return CGPoint(x: targetPoint.x, y: proposedContentOffset.y)
     }
 
 }

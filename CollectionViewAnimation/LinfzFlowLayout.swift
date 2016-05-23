@@ -9,6 +9,9 @@
 import UIKit
 
 class LinfzFlowLayout: UICollectionViewFlowLayout {
+    
+    var targetIndex = 0
+    
     override init() {
         super.init()
         config()
