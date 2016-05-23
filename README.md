@@ -1,13 +1,6 @@
 #### CollectionViewAnimationDemo
 learn about collection-view animation 
 
-know about following APIs
-* prepareLayout
-* prepareForCollectionViewUpdates:
-* finalizeCollectionViewUpdates
-* prepareForAnimatedBoundsChange:
-* finalizeAnimatedBoundsChange
-* shouldInvalidateLayoutForBoundsChange:
+use `setCollectionViewLayout` to change the item's size
 
-
-*https://www.objc.io/issues/12-animations/collectionview-animations/*
+TODO:  try to use `targetContentOffsetForProposedContentOffset` to make the cell witch selected move to the correct position
