@@ -62,7 +62,7 @@ class LinfzCollectionViewCell: UICollectionViewCell {
 
     
     func didTapCollectionView(notification:NSNotification) {
-        
+        //do something just like layout cell's subviews
     }
 
 }

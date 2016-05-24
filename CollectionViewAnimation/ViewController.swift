@@ -41,7 +41,7 @@ class ViewController: UIViewController {
     }
 }
 
-// MARK: - method
+// MARK: - Method
 extension ViewController {
     func didTapCollectionView(notification:NSNotification) {
         if let userInfo = notification.userInfo {
@@ -118,7 +118,7 @@ extension ViewController {
     }
 }
 
-// MARK: - collectinView dataSource and collectionView delegate
+// MARK: - CollectinView dataSource
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -137,6 +137,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     }
 }
 
+//MARK: - ScrollViewDelegate
 extension ViewController: UIScrollViewDelegate {
     
     func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
