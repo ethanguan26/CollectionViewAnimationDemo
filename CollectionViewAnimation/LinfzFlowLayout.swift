@@ -29,12 +29,26 @@ class LinfzFlowLayout: UICollectionViewFlowLayout {
     }
     
     override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
+        #if false
         let numberOfItems = collectionView!.numberOfItemsInSection(0)
         for index in 0 ..< numberOfItems{
             let cell = collectionView?.cellForItemAtIndexPath(NSIndexPath(forRow: index, inSection: 0))
             cell?.frame.origin.y = newBounds.size.height - (cell?.frame.size.height)!
             cell?.contentView.frame.origin.y = (cell?.frame.origin.y)!
         }
+            #endif
+        
+        #if true
+            
+            let visibleCells = collectionView!.visibleCells()
+            for index in 0 ..< visibleCells.count{
+                let cell = visibleCells[index]
+                cell.frame.origin.y = newBounds.size.height - (cell.frame.size.height)
+                cell.contentView.frame.origin.y = (cell.frame.origin.y)
+            }
+
+            #endif
+        
         return false
     }
     
