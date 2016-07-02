@@ -17,27 +17,22 @@ class ViewController: UIViewController {
     @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
     
     var itemType = ItemType.Small
-    var originType = ItemType.Small
     var selectedIndex = 0
     var isTurnToBigSize = false
     
     var smallLayout = LinfzFlowLayout()
     var normalLayout = LinfzFlowLayout()
-    var largeLayout = LinfzFlowLayout()
     
-    //MARK: - life circle
+    //MARK: - life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        smallLayout.itemSize = CGSize(width: ITEM_SMALL_WIDTH, height: ITEM_SMALL_HEIGHT)
-        normalLayout.itemSize = CGSize(width: ITEM_NORMAL_WIDTH, height: ITEM_NORMAL_HEIGHT)
-        largeLayout.itemSize = CGSize(width: ScreenWidth, height: ScreenHeight)
-        
+        smallLayout.itemSize = LinfzSize.SmallItemSize
+        normalLayout.itemSize = LinfzSize.NormalItemSize
         collectionView.registerNib(UINib(nibName: "LinfzCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
         collectionView.decelerationRate = 0.3
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.didTapCollectionView(_:)), name: DidTapCollectionViewNotification, object: nil)
-        
+        collectionViewHeightConstraint.constant = LinfzSize.SmallItemSize.height
+        collectionView.setCollectionViewLayout(smallLayout, animated: false)
     }
 }
 
@@ -47,11 +42,9 @@ extension ViewController {
         if let userInfo = notification.userInfo {
             itemType = ItemType(rawValue: (userInfo["currentItemType"]?.integerValue)!)!
             selectedIndex = (notification.userInfo?["tapedCellIndex"]?.integerValue)!
-            originType = ItemType(rawValue: (notification.userInfo?["originItemType"]?.integerValue)!)!
             isTurnToBigSize = (notification.userInfo?["isTurnToBigSize"]?.boolValue)!
         }else {
             itemType = .Small
-            originType = .Large
             isTurnToBigSize = false
         }
         layoutCollectionViewSubviews()
@@ -71,9 +64,6 @@ extension ViewController {
         case .Normal:
             headerHeight = 0
             layout = normalLayout
-        case .Large:
-            headerHeight = 0
-            layout = largeLayout
         }
         
         layout?.setValue(selectedIndex, forKey: "targetIndex")
@@ -102,16 +92,12 @@ extension ViewController {
         
         switch itemType {
         case .Small:
-            itemSize = CGSizeMake(ITEM_SMALL_WIDTH, ITEM_SMALL_HEIGHT)
-            locationHeight = ITEM_SMALL_HEIGHT
+            itemSize = LinfzSize.SmallItemSize
+            locationHeight = itemSize.height
             
         case .Normal:
-            itemSize = CGSizeMake(ITEM_NORMAL_WIDTH, ITEM_NORMAL_HEIGHT)
-            locationHeight = ITEM_NORMAL_HEIGHT
-            
-        case .Large:
-            itemSize = CGSizeMake(ScreenWidth, ScreenHeight)
-            locationHeight = ScreenHeight
+            itemSize = LinfzSize.NormalItemSize
+            locationHeight = itemSize.height
         }
         return (itemSize,locationHeight)
         
@@ -131,7 +117,6 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.titleLabel.text = "\(indexPath.row + 1)"
         cell.backgroundColor = UIColor(red: CGFloat(arc4random_uniform(255)) / 255.0, green: CGFloat(arc4random_uniform(255)) / 255.0, blue: CGFloat(arc4random_uniform(255)) / 255.0, alpha: 1)
         cell.currentItemType = itemType
-        cell.originItemType = originType
         cell.index = indexPath.row
         return cell
     }
@@ -144,11 +129,10 @@ extension ViewController: UIScrollViewDelegate {
         if velocity == CGPointZero {
             return
         }
-        
         if velocity.x > 0 {
             selectedIndex += 1
         }
-        if velocity.x < 0{
+        if velocity.x < 0 {
             selectedIndex -= 1
         }
         if selectedIndex < 0 {
@@ -159,16 +143,7 @@ extension ViewController: UIScrollViewDelegate {
 
         let sizeAndHeight = getItemSizeAndContainer(itemType)
         let itemSize = sizeAndHeight.itemSize
-        
-        var targetPoint = CGPointZero
-        if selectedIndex == 1 {
-            targetPoint.x = itemSize.width * 1.5 + ITEM_SPACING - ScreenWidth / 2
-        } else if selectedIndex > 1  && selectedIndex < (collectionView?.numberOfItemsInSection(0))! - 1{
-            targetPoint.x = itemSize.width * 1.5 + ITEM_SPACING - ScreenWidth / 2 + CGFloat(selectedIndex - 1) * (itemSize.width + ITEM_SPACING)
-        } else if selectedIndex ==  (collectionView?.numberOfItemsInSection(0))! - 1 {
-            targetPoint.x =  itemSize.width * 3 + ITEM_SPACING * 2 - ScreenWidth + CGFloat(selectedIndex - 2) * (itemSize.width + ITEM_SPACING)
-        }
-        
+        let targetPoint = LinfzHelper.targetPoint(selectedIndex, itemSize: itemSize, itemCounts: (collectionView?.numberOfItemsInSection(0))!)
         targetContentOffset.memory = CGPoint(x: CGFloat(targetPoint.x),y: CGFloat(targetPoint.y))
         scrollView.setContentOffset(targetPoint, animated: true)
     }

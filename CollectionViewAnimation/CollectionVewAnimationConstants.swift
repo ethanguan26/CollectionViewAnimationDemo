@@ -12,13 +12,26 @@ import UIKit
 enum ItemType : Int{
     case Small = 0
     case Normal = 1
-    case Large = 2
 }
 
-let ScreenWidth = UIScreen.mainScreen().bounds.size.width
-let ScreenHeight = UIScreen.mainScreen().bounds.size.height
-let ITEM_NORMAL_HEIGHT = ScreenHeight - 90
-let ITEM_SMALL_HEIGHT = CGFloat(200)
-let ITEM_NORMAL_WIDTH = CGFloat(ScreenWidth - 40)
-let ITEM_SMALL_WIDTH = CGFloat(130) + (ScreenWidth - 320) / 2
-let ITEM_SPACING = CGFloat(6)
+struct LinfzSize {
+    static let ScreenWidth = UIScreen.mainScreen().bounds.size.width
+    static let ScreenHeight = UIScreen.mainScreen().bounds.size.height
+    static let SmallItemSize = CGSize(width: CGFloat(130) * ScreenWidth / 320, height: 200 * ScreenWidth / 320)
+    static let NormalItemSize = CGSize(width: ScreenWidth, height: ScreenHeight)
+    static let Spacing:CGFloat = 6.0
+}
+
+class LinfzHelper {
+    class func targetPoint(selectedIndex: Int,itemSize: CGSize, itemCounts: Int) -> CGPoint {
+        var targetPoint = CGPointZero
+        if selectedIndex == 1 {
+            targetPoint.x = itemSize.width * 1.5 + LinfzSize.Spacing - LinfzSize.ScreenWidth / 2
+        } else if selectedIndex > 1  && selectedIndex < itemCounts - 1{
+            targetPoint.x = itemSize.width * 1.5 + LinfzSize.Spacing - LinfzSize.ScreenWidth / 2 + CGFloat(selectedIndex - 1) * (itemSize.width + LinfzSize.Spacing)
+        } else if selectedIndex ==  itemCounts - 1 {
+            targetPoint.x =  itemSize.width * 3 + LinfzSize.Spacing * 2 - LinfzSize.ScreenWidth + CGFloat(selectedIndex - 2) * (itemSize.width + LinfzSize.Spacing)
+        }
+        return targetPoint
+    }
+}

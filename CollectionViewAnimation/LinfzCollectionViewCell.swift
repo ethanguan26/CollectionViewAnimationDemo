@@ -13,7 +13,6 @@ class LinfzCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     var index = 0
     var isTurnToBigSize = true
-    var originItemType:ItemType = .Small
     var currentItemType:ItemType = .Small
     
     override func awakeFromNib() {
@@ -31,20 +30,9 @@ class LinfzCollectionViewCell: UICollectionViewCell {
         switch type {
         case .Small:
             currentItemType = .Normal
-            originItemType = .Small
             isTurnToBigSize = true
         case .Normal:
-            if originItemType == .Small {
-                currentItemType = .Large
-                isTurnToBigSize = true
-            }else{
-                currentItemType = .Small
-                isTurnToBigSize = false
-            }
-            originItemType = .Normal
-        case .Large:
-            currentItemType = .Normal
-            originItemType = .Large
+            currentItemType = .Small
             isTurnToBigSize = false
         }
         sendInfo()
@@ -54,7 +42,6 @@ class LinfzCollectionViewCell: UICollectionViewCell {
         
         let viewInfo = ["tapedCellIndex":index,
                         "currentItemType":"\(currentItemType.rawValue)",
-                        "originItemType":"\(originItemType.rawValue)",
                         "isTurnToBigSize":"\(isTurnToBigSize)"]
         
         NSNotificationCenter.defaultCenter().postNotificationName(DidTapCollectionViewNotification, object: self, userInfo: viewInfo as [NSObject : AnyObject])
