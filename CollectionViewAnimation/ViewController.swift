@@ -54,7 +54,7 @@ extension ViewController {
         var collectionHeight:CGFloat
         var headerHeight: CGFloat
         var layout: UICollectionViewFlowLayout?
-        let sizeAndHeight = getItemSizeAndContainer(itemType)
+        let sizeAndHeight = LinfzHelper.getItemSizeAndContainer(itemType)
         collectionHeight = sizeAndHeight.locationHeight
         
         switch itemType {
@@ -86,22 +86,6 @@ extension ViewController {
         
     }
     
-    func getItemSizeAndContainer(itemType:ItemType) -> (itemSize:CGSize,locationHeight:CGFloat) {
-        var itemSize = CGSizeZero
-        var locationHeight = CGFloat()
-        
-        switch itemType {
-        case .Small:
-            itemSize = LinfzSize.SmallItemSize
-            locationHeight = itemSize.height
-            
-        case .Normal:
-            itemSize = LinfzSize.NormalItemSize
-            locationHeight = itemSize.height
-        }
-        return (itemSize,locationHeight)
-        
-    }
 }
 
 // MARK: - CollectinView dataSource
@@ -141,7 +125,7 @@ extension ViewController: UIScrollViewDelegate {
             selectedIndex = collectionView.numberOfItemsInSection(0) - 1
         }
 
-        let sizeAndHeight = getItemSizeAndContainer(itemType)
+        let sizeAndHeight = LinfzHelper.getItemSizeAndContainer(itemType)
         let itemSize = sizeAndHeight.itemSize
         let targetPoint = LinfzHelper.targetPoint(selectedIndex, itemSize: itemSize, itemCounts: (collectionView?.numberOfItemsInSection(0))!)
         targetContentOffset.memory = CGPoint(x: CGFloat(targetPoint.x),y: CGFloat(targetPoint.y))

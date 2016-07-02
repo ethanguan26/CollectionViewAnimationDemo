@@ -43,6 +43,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		580EC4BB1D27ABF000CE2D5D /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				58C3FBA71CEF56CE0008922E /* LinfzCollectionViewCell.swift */,
+				58C3FBA81CEF56CE0008922E /* LinfzCollectionViewCell.xib */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		580EC4BC1D27AC7800CE2D5D /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				58C3FBA31CEF48470008922E /* LinfzFlowLayout.swift */,
+			);
+			name = Layout;
+			sourceTree = "<group>";
+		};
 		58C3FB831CEF477C0008922E = {
 			isa = PBXGroup;
 			children = (
@@ -62,10 +79,9 @@
 		58C3FB8E1CEF477C0008922E /* CollectionViewAnimation */ = {
 			isa = PBXGroup;
 			children = (
-				58C3FBA71CEF56CE0008922E /* LinfzCollectionViewCell.swift */,
-				58C3FBA81CEF56CE0008922E /* LinfzCollectionViewCell.xib */,
+				580EC4BB1D27ABF000CE2D5D /* Cell */,
+				580EC4BC1D27AC7800CE2D5D /* Layout */,
 				5891BC301CF2AAF8005D3225 /* CollectionVewAnimationConstants.swift */,
-				58C3FBA31CEF48470008922E /* LinfzFlowLayout.swift */,
 				58C3FB911CEF477C0008922E /* ViewController.swift */,
 				58C3FB931CEF477C0008922E /* Main.storyboard */,
 				58C3FBA61CEF54240008922E /* Supporting Files */,

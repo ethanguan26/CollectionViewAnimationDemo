@@ -44,5 +44,20 @@ class LinfzFlowLayout: UICollectionViewFlowLayout {
         let targetPoint = LinfzHelper.targetPoint(targetIndex, itemSize: itemSize, itemCounts: (collectionView?.numberOfItemsInSection(0))!)
         return CGPoint(x: targetPoint.x, y: proposedContentOffset.y)
     }
+    
+    override func prepareForAnimatedBoundsChange(oldBounds: CGRect) {
+        print("prepareForAnimatedBoundsChange")
+        super.prepareForAnimatedBoundsChange(oldBounds)
+    }
+    
+    override func prepareForTransitionToLayout(newLayout: UICollectionViewLayout) {
+        print("prepareForTransitionToLayout")
+        super.prepareForTransitionToLayout(newLayout)
+    }
+    
+    override func prepareForTransitionFromLayout(oldLayout: UICollectionViewLayout) {
+        print("prepareForTransitionFromLayout")
+        super.prepareForTransitionFromLayout(oldLayout)
+    }
 
 }
