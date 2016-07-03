@@ -59,5 +59,10 @@ class LinfzFlowLayout: UICollectionViewFlowLayout {
         print("prepareForTransitionFromLayout")
         super.prepareForTransitionFromLayout(oldLayout)
     }
+    
+    override func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
+        print("layoutAttributesForItemAtIndexPath \(indexPath)")
+        return super.layoutAttributesForItemAtIndexPath(indexPath)
+    }
 
 }
