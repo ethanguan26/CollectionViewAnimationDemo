@@ -24,11 +24,11 @@ class LinfzFlowLayout: UICollectionViewFlowLayout {
     
     func config(){
         itemSize = LinfzSize.SmallItemSize
-        scrollDirection = .Horizontal
+        scrollDirection = .horizontal
         minimumLineSpacing = LinfzSize.Spacing
     }
     
-    override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
+    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         let cells = collectionView?.visibleCells()
         if let visibleCells = cells {
             for visibleCell in visibleCells {
@@ -40,29 +40,29 @@ class LinfzFlowLayout: UICollectionViewFlowLayout {
         return false
     }
     
-    override func targetContentOffsetForProposedContentOffset(proposedContentOffset: CGPoint) -> CGPoint {
-        let targetPoint = LinfzHelper.targetPoint(targetIndex, itemSize: itemSize, itemCounts: (collectionView?.numberOfItemsInSection(0))!)
+    override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
+        let targetPoint = LinfzHelper.targetPoint(targetIndex, itemSize: itemSize, itemCounts: (collectionView?.numberOfItems(inSection: 0))!)
         return CGPoint(x: targetPoint.x, y: proposedContentOffset.y)
     }
     
-    override func prepareForAnimatedBoundsChange(oldBounds: CGRect) {
+    override func prepare(forAnimatedBoundsChange oldBounds: CGRect) {
         print("prepareForAnimatedBoundsChange")
-        super.prepareForAnimatedBoundsChange(oldBounds)
+        super.prepare(forAnimatedBoundsChange: oldBounds)
     }
     
-    override func prepareForTransitionToLayout(newLayout: UICollectionViewLayout) {
+    override func prepareForTransition(to newLayout: UICollectionViewLayout) {
         print("prepareForTransitionToLayout")
-        super.prepareForTransitionToLayout(newLayout)
+        super.prepareForTransition(to: newLayout)
     }
     
-    override func prepareForTransitionFromLayout(oldLayout: UICollectionViewLayout) {
+    override func prepareForTransition(from oldLayout: UICollectionViewLayout) {
         print("prepareForTransitionFromLayout")
-        super.prepareForTransitionFromLayout(oldLayout)
+        super.prepareForTransition(from: oldLayout)
     }
     
-    override func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
+    override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         print("layoutAttributesForItemAtIndexPath \(indexPath)")
-        return super.layoutAttributesForItemAtIndexPath(indexPath)
+        return super.layoutAttributesForItem(at: indexPath)
     }
 
 }

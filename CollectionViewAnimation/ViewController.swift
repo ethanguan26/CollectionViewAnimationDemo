@@ -28,9 +28,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         smallLayout.itemSize = LinfzSize.SmallItemSize
         normalLayout.itemSize = LinfzSize.NormalItemSize
-        collectionView.registerNib(UINib(nibName: "LinfzCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
+        collectionView.register(UINib(nibName: "LinfzCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "Cell")
         collectionView.decelerationRate = 0.3
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.didTapCollectionView(_:)), name: DidTapCollectionViewNotification, object: nil)
+        NotificationCenter.default().addObserver(self, selector: #selector(ViewController.didTapCollectionView(_:)), name: DidTapCollectionViewNotification, object: nil)
         collectionViewHeightConstraint.constant = LinfzSize.SmallItemSize.height
         collectionView.setCollectionViewLayout(smallLayout, animated: false)
     }
@@ -38,11 +38,11 @@ class ViewController: UIViewController {
 
 // MARK: - Method
 extension ViewController {
-    func didTapCollectionView(notification:NSNotification) {
-        if let userInfo = notification.userInfo {
-            itemType = ItemType(rawValue: (userInfo["currentItemType"]?.integerValue)!)!
-            selectedIndex = (notification.userInfo?["tapedCellIndex"]?.integerValue)!
-            isTurnToBigSize = (notification.userInfo?["isTurnToBigSize"]?.boolValue)!
+    func didTapCollectionView(_ notification:Notification) {
+        if let userInfo = (notification as NSNotification).userInfo {
+            itemType = ItemType(rawValue: (userInfo["currentItemType"]?.intValue)!)!
+            selectedIndex = ((notification as NSNotification).userInfo?["tapedCellIndex"]?.intValue)!
+            isTurnToBigSize = ((notification as NSNotification).userInfo?["isTurnToBigSize"]?.boolValue)!
         }else {
             itemType = .Small
             isTurnToBigSize = false
@@ -72,13 +72,13 @@ extension ViewController {
         if isTurnToBigSize {
             self.view.layoutIfNeeded()
         }
-        UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
             if !self.isTurnToBigSize {
                 self.view.layoutIfNeeded()
             }
             self.collectionView.setCollectionViewLayout(layout!, animated: true)
         }) { (finish) in
-            UIView.animateWithDuration(0.3, animations: {
+            UIView.animate(withDuration: 0.3, animations: {
                 self.headerHeightConstraint.constant = headerHeight
                 self.view.layoutIfNeeded()
             })
@@ -91,17 +91,17 @@ extension ViewController {
 // MARK: - CollectinView dataSource
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! LinfzCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! LinfzCollectionViewCell
         
-        cell.titleLabel.text = "\(indexPath.row + 1)"
+        cell.titleLabel.text = "\((indexPath as NSIndexPath).row + 1)"
         cell.backgroundColor = UIColor(red: CGFloat(arc4random_uniform(255)) / 255.0, green: CGFloat(arc4random_uniform(255)) / 255.0, blue: CGFloat(arc4random_uniform(255)) / 255.0, alpha: 1)
         cell.currentItemType = itemType
-        cell.index = indexPath.row
+        cell.index = (indexPath as NSIndexPath).row
         return cell
     }
 }
@@ -109,8 +109,8 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 //MARK: - ScrollViewDelegate
 extension ViewController: UIScrollViewDelegate {
     
-    func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        if velocity == CGPointZero {
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if velocity == CGPoint.zero {
             return
         }
         if velocity.x > 0 {
@@ -121,14 +121,14 @@ extension ViewController: UIScrollViewDelegate {
         }
         if selectedIndex < 0 {
             selectedIndex = 0
-        } else if selectedIndex > collectionView.numberOfItemsInSection(0) - 1 {
-            selectedIndex = collectionView.numberOfItemsInSection(0) - 1
+        } else if selectedIndex > collectionView.numberOfItems(inSection: 0) - 1 {
+            selectedIndex = collectionView.numberOfItems(inSection: 0) - 1
         }
 
         let sizeAndHeight = LinfzHelper.getItemSizeAndContainer(itemType)
         let itemSize = sizeAndHeight.itemSize
-        let targetPoint = LinfzHelper.targetPoint(selectedIndex, itemSize: itemSize, itemCounts: (collectionView?.numberOfItemsInSection(0))!)
-        targetContentOffset.memory = CGPoint(x: CGFloat(targetPoint.x),y: CGFloat(targetPoint.y))
+        let targetPoint = LinfzHelper.targetPoint(selectedIndex, itemSize: itemSize, itemCounts: (collectionView?.numberOfItems(inSection: 0))!)
+        targetContentOffset.pointee = CGPoint(x: CGFloat(targetPoint.x),y: CGFloat(targetPoint.y))
         scrollView.setContentOffset(targetPoint, animated: true)
     }
     
