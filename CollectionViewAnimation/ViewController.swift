@@ -112,13 +112,12 @@ extension ViewController: UIScrollViewDelegate {
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         if velocity == CGPoint.zero {
             return
-        }
-        if velocity.x > 0 {
+        } else if velocity.x > 0 {
             selectedIndex += 1
-        }
-        if velocity.x < 0 {
+        } else if velocity.x < 0 {
             selectedIndex -= 1
         }
+        
         if selectedIndex < 0 {
             selectedIndex = 0
         } else if selectedIndex > collectionView.numberOfItems(inSection: 0) - 1 {
