@@ -15,16 +15,16 @@ enum ItemType : Int{
 }
 
 struct LinfzSize {
-    static let ScreenWidth = UIScreen.main().bounds.size.width
-    static let ScreenHeight = UIScreen.main().bounds.size.height
+    static let ScreenWidth = UIScreen.mainScreen().bounds.size.width
+    static let ScreenHeight = UIScreen.mainScreen().bounds.size.height
     static let SmallItemSize = CGSize(width: CGFloat(lroundf(130.0 * Float(ScreenWidth) / 320.0)) , height: CGFloat(lroundf(200.0 * Float(ScreenWidth) / 320.0)))
     static let NormalItemSize = CGSize(width: ScreenWidth, height: ScreenHeight)
     static let Spacing:CGFloat = 2.0
 }
 
 class LinfzHelper {
-    class func targetPoint(_ selectedIndex: Int,itemSize: CGSize, itemCounts: Int) -> CGPoint {
-        var targetPoint = CGPoint.zero
+    class func targetPoint(selectedIndex: Int,itemSize: CGSize, itemCounts: Int) -> CGPoint {
+        var targetPoint = CGPointZero
         if selectedIndex == 1 {
             targetPoint.x = itemSize.width * 1.5 + LinfzSize.Spacing - LinfzSize.ScreenWidth / 2
         } else if selectedIndex > 1  && selectedIndex < itemCounts - 1{
@@ -36,7 +36,7 @@ class LinfzHelper {
     }
     
     
-    class func getItemSizeAndContainer(_ itemType:ItemType) -> (itemSize:CGSize,locationHeight:CGFloat) {
+    class func getItemSizeAndContainer(itemType:ItemType) -> (itemSize:CGSize,locationHeight:CGFloat) {
         var itemSize = CGSize.zero
         var locationHeight = CGFloat()
         switch itemType {

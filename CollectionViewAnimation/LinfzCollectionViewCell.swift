@@ -18,14 +18,15 @@ class LinfzCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        NotificationCenter.default().addObserver(self, selector: #selector(LinfzCollectionViewCell.didTapCollectionView(_:)), name: DidTapCollectionViewNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LinfzCollectionViewCell.didTapCollectionView(_:)), name: DidTapCollectionViewNotification, object: nil)
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(LinfzCollectionViewCell.tapGesture(_:)))
         titleLabel.addGestureRecognizer(tapGesture)
-        titleLabel.isUserInteractionEnabled = true
+        titleLabel.userInteractionEnabled = true
         
     }
     
-    func tapGesture(_ gesture:UITapGestureRecognizer) {
+    func tapGesture(gesture:UITapGestureRecognizer) {
         let type = currentItemType
         switch type {
         case .Small:
@@ -43,12 +44,12 @@ class LinfzCollectionViewCell: UICollectionViewCell {
         let viewInfo = ["tapedCellIndex":index,
                         "currentItemType":"\(currentItemType.rawValue)",
                         "isTurnToBigSize":"\(isTurnToBigSize)"]
-        
-        NotificationCenter.default().post(name: Notification.Name(rawValue: DidTapCollectionViewNotification), object: self, userInfo: viewInfo as [NSObject : AnyObject])
+
+        NSNotificationCenter.defaultCenter().postNotificationName(DidTapCollectionViewNotification, object: self, userInfo: viewInfo as [NSObject : AnyObject])
     }
 
     
-    func didTapCollectionView(_ notification:Notification) {
+    func didTapCollectionView(notification:NSNotification) {
         //do something just like layout cell's subviews
     }
 

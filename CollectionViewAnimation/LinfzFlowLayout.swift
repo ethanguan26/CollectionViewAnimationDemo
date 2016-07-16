@@ -24,11 +24,11 @@ class LinfzFlowLayout: UICollectionViewFlowLayout {
     
     func config(){
         itemSize = LinfzSize.SmallItemSize
-        scrollDirection = .horizontal
+        scrollDirection = .Horizontal
         minimumLineSpacing = LinfzSize.Spacing
     }
     
-    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+    override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
         let cells = collectionView?.visibleCells()
         if let visibleCells = cells {
             for visibleCell in visibleCells {
@@ -40,8 +40,8 @@ class LinfzFlowLayout: UICollectionViewFlowLayout {
         return false
     }
     
-    override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
-        let targetPoint = LinfzHelper.targetPoint(targetIndex, itemSize: itemSize, itemCounts: (collectionView?.numberOfItems(inSection: 0))!)
+    override func targetContentOffsetForProposedContentOffset(proposedContentOffset: CGPoint) -> CGPoint {
+        let targetPoint = LinfzHelper.targetPoint(targetIndex, itemSize: itemSize, itemCounts: (collectionView?.numberOfItemsInSection(0))!)
         return CGPoint(x: targetPoint.x, y: proposedContentOffset.y)
     }
 }
