@@ -24,6 +24,8 @@ struct LinfzSize {
 
 class LinfzHelper {
     class func targetPoint(selectedIndex: Int,itemSize: CGSize, itemCounts: Int) -> CGPoint {
+        
+        //根据cell的大小以及spacing计算滑动结束的位置。
         var targetPoint = CGPointZero
         if selectedIndex == 1 {
             targetPoint.x = itemSize.width * 1.5 + LinfzSize.Spacing - LinfzSize.ScreenWidth / 2
@@ -37,6 +39,8 @@ class LinfzHelper {
     
     
     class func getItemSizeAndContainer(itemType:ItemType) -> (itemSize:CGSize,locationHeight:CGFloat) {
+        
+        //获取当前cell大小
         var itemSize = CGSize.zero
         var locationHeight = CGFloat()
         switch itemType {
@@ -48,7 +52,6 @@ class LinfzHelper {
             locationHeight = itemSize.height
         }
         return (itemSize,locationHeight)
-        
     }
     
 }

@@ -69,6 +69,7 @@ extension ViewController {
         layout?.setValue(selectedIndex, forKey: "targetIndex")
         self.collectionViewHeightConstraint.constant = collectionHeight
         
+        // 替换collectionview的layout，从而改变大小，这部分代码可自行调整看看效果，目前这样实现感觉效果比较平滑可以接受。
         if isTurnToBigSize {
             self.view.layoutIfNeeded()
         }
@@ -93,23 +94,40 @@ extension ViewController {
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-
         return 10
     }
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! LinfzCollectionViewCell
         cell.titleLabel.text = "\((indexPath as NSIndexPath).row + 1)"
         cell.backgroundColor = UIColor(red: CGFloat(arc4random_uniform(255)) / 255.0, green: CGFloat(arc4random_uniform(255)) / 255.0, blue: CGFloat(arc4random_uniform(255)) / 255.0, alpha: 1)
+        
+        //设置cell的类型
         cell.currentItemType = itemType
+        
+        //由于项目中使用的cell情况有些特殊，所以没有使用didSelect的代理方法，需要对cell设置一个索引。
         cell.index = (indexPath as NSIndexPath).row
         return cell
     }
+    
 }
+
+
 
 //MARK: - ScrollViewDelegate
 extension ViewController: UIScrollViewDelegate {
     
+    
+    /**
+     控制scrollView滑动动画结束时scrollView滑动的位置
+     
+     - parameter scrollView:          滑动的scrollview
+     - parameter velocity:            用户松手时滑动的速率(CGPoint标示)
+     - parameter targetContentOffset: 动画结束时的停止位置
+     */
     func scrollViewWillEndDragging(scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        
+        // 计算出滑动目的地位置
+        
         if velocity == CGPoint.zero {
             return
         } else if velocity.x > 0 {
@@ -118,6 +136,7 @@ extension ViewController: UIScrollViewDelegate {
             selectedIndex -= 1
         }
         
+        // 作为第一个cell与最后元素的处理
         if selectedIndex < 0 {
             selectedIndex = 0
         } else if selectedIndex > collectionView.numberOfItemsInSection(0) - 1 {
@@ -128,7 +147,6 @@ extension ViewController: UIScrollViewDelegate {
         let itemSize = sizeAndHeight.itemSize
         let targetPoint = LinfzHelper.targetPoint(selectedIndex, itemSize: itemSize, itemCounts: (collectionView?.numberOfItemsInSection(0))!)
         targetContentOffset.memory = CGPoint(x: CGFloat(targetPoint.x),y: CGFloat(targetPoint.y))
-
         scrollView.setContentOffset(targetPoint, animated: true)
     }
     
